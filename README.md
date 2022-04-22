@@ -4,6 +4,7 @@
 
 - [ ] Læse blog
 - [ ] Log ind
+- [ ] Registrere
 - [ ] Lave en blog
 - [ ] Søge i blog
 - [ ] Redigere blog
