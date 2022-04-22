@@ -2,15 +2,16 @@
 
 ## User stories
 
-- [ ] Læse blog
-- [ ] Log ind
-- [ ] Registrere
-- [ ] Lave en blog
-- [ ] Søge i blog
-- [ ] Redigere blog
-- [ ] Slette blog
-- [ ] Log ud
-- [ ] Ændre profil
-- [ ] Sætte billeder på blogs
-- [ ] Kigge på andres profiler
-- [ ] Søge i brugere
+- [ ] Read blog post
+- [ ] Log in
+- [ ] Register
+- [ ] Make blog post
+- [ ] Search blog posts
+- [ ] Edit blog post
+- [ ] Delete blog post
+- [ ] Log out
+- [ ] Have a profile
+- [ ] Edit profile
+- [ ] Use images on blog posts
+- [ ] Look at other users profiles
+- [ ] Search users
