@@ -71,3 +71,25 @@
 ```
 
 ## Blog
+
+### POST /create-blog
+
+#### Request
+
+```ts
+{
+    token: string,
+    title: string,
+    content: string,
+    userId: number
+}
+```
+
+#### Post
+
+```ts
+{
+    response: "Ok" | "Unauthorized" | "Title invalid" | "Content too long",
+    blog?: Blog[]
+}
+```
