@@ -1,25 +1,25 @@
 # blog-app
 
-## user stories
+## User stories
 
-lave en blog
+Lave en blog
 
-læse blog
+Læse blog
 
-redigere blog
+Redigere blog
 
-slette blog
+Slette blog
 
-log ind
+Log ind
 
-log ud
+Log ud
 
-søge i blog
+Søge i blog
 
-ændre profil
+Ændre profil
 
-sætte billeder på blogs
+Sætte billeder på blogs
 
-kigge på andres profiler
+Kigge på andres profiler
 
-søge i brugere
+Søge i brugere
