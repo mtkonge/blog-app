@@ -83,7 +83,7 @@ const testDuplicateUsername = async () => {
 
     test(
         res1.error === "Username already in use",
-        `register w duplicate username: response error was '${res.error}', expected 'Username already in use'`,
+        `register w duplicate username: response error was '${res1.error}', expected 'Username already in use'`,
     );
 };
 
