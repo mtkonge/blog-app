@@ -136,11 +136,16 @@ const testUniqueUserId = async () => {
     );
 };
 
-const testCorrectRegister = async (): Promise<ReturnedRegisterInformation> => {
-    const username = randomUsername();
+const testCorrectRegister = async ({
+    username,
+    password,
+}: {
+    username: string;
+    password: string;
+}): Promise<ReturnedRegisterInformation> => {
     const body = {
         username,
-        password: "passwd",
+        password,
     } as unknown as BodyInit;
 
     const res = await (
@@ -173,10 +178,13 @@ const testCorrectRegister = async (): Promise<ReturnedRegisterInformation> => {
     };
 };
 
-export const testRegister = async (): Promise<ReturnedRegisterInformation> => {
+export const testRegister = async (testuser: {
+    username: string;
+    password: string;
+}): Promise<ReturnedRegisterInformation> => {
     await testMissingPassword();
     await testMissingUsername();
     await testDuplicateUsername();
     await testUniqueUserId();
-    return await testCorrectRegister();
+    return await testCorrectRegister(testuser);
 };

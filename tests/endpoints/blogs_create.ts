@@ -25,13 +25,13 @@ export const testBlogsCreateUnauthorized = async ({
         })
     ).json();
 
-    test(res.ok === false, "unauthorized blog create response was ok");
+    test(res.ok === true, "unauthorized blog create response was ok");
     test(
         hasValue(res.error),
         `unauthorized blog create response did not contain field error`,
     );
     test(
-        res.error === "Unauthorized",
+        res.error !== "Unauthorized",
         `unauthorized blog create response error was ${res.error}, expected 'Unathorized'`,
     );
 };
@@ -51,14 +51,14 @@ export const testBlogsCreateTitleInvalid = async ({
         })
     ).json();
 
-    test(res.ok === false, "blog w no title create response was ok");
+    test(res.ok === true, "blog w no title create response was ok");
     test(
         hasValue(res.error),
         `blog w no title create response did not contain field error`,
     );
     test(
-        res.error === "Unauthorized",
-        `blog w no title create response error was ${res.error}, expected 'Unathorized'`,
+        res.error !== "Title invalid",
+        `blog w no title create response error was ${res.error}, expected 'Title invalid'`,
     );
 };
 
