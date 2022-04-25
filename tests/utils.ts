@@ -7,3 +7,7 @@ export const test = (ok: boolean, msg: string) => {
         console.log(`test failed: ${msg}`);
     }
 };
+
+export const hasValue = (t: any): boolean => {
+    return t !== null && t !== undefined;
+};

@@ -1,7 +1,7 @@
 import { API_URL } from "../api_url.ts";
-import { randomUsername, test } from "../utils.ts";
+import { randomUsername, test, hasValue } from "../utils.ts";
 
-interface ReturnedRegisterInformation {
+export interface ReturnedRegisterInformation {
     userId: string;
     username: string;
     passwordHash: string;
@@ -26,7 +26,10 @@ const testMissingPassword = async () => {
         res.error === "Invalid username/password",
         `register w missing password: response error was '${res.error}', expected 'Invalid username/password'`,
     );
-    test(res.user === null, "register w missing password: user field not null");
+    test(
+        hasValue(res.user) === false,
+        "register w missing password: user field not null",
+    );
 };
 
 const testMissingUsername = async () => {
@@ -47,7 +50,10 @@ const testMissingUsername = async () => {
         res.error === "Invalid username/password",
         `register w missing username: response error was '${res.error}', expected 'Invalid username/password'`,
     );
-    test(res.user === null, "register w missing username: user field not null");
+    test(
+        hasValue(res.user) === false,
+        "register w missing username: user field not null",
+    );
 };
 
 const testDuplicateUsername = async () => {
@@ -146,7 +152,7 @@ const testCorrectRegister = async (): Promise<ReturnedRegisterInformation> => {
 
     test(res.ok === true, "register correctly: response was not OK");
     test(
-        res.error === null,
+        hasValue(res.error) === false,
         `register correctly: response error was '${res.error}', expected null`,
     );
     test(res.user !== null, "register correctly: user field null");
