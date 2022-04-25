@@ -11,3 +11,9 @@ export const test = (ok: boolean, msg: string) => {
 export const hasValue = (t: any): boolean => {
     return t !== null && t !== undefined;
 };
+
+export const jsonHeaders = () =>
+    new Headers({ "Content-Type": "application/json" });
+
+export const jsonAuthHeaders = (token: string) =>
+    new Headers({ "Content-Type": "application/json", token: token });
