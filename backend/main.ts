@@ -1,44 +1,44 @@
-import { Application, Status } from "https://deno.land/x/oak@v10.4.0/mod.ts";
+import { Application, Status } from "./deps.ts";
+import { Ctx, Next, State } from "./models.ts";
 
-type LoginRequest = {
-    username: string,
-    password: string,
-}
+import { loginHandler } from "./Login.ts";
 
-type LoginResult = {
-    msg: string
-}
+const app = new Application<State>();
 
-function loginHandler(req: LoginRequest): LoginResult {
-    const {username, password} = req;
-    if (username != password)
-        throw new Error('yes yes');
-    else
-        return {msg: "hello world"};
-}
-
-
-const app = new Application();
-
-app.use((ctx) => {
+async function setResponseType(ctx: Ctx, next: Next) {
+    // Should set response type to json
     // So we dont have to set it later
     ctx.response.type = 'json';
-})
+    next();
+}
 
-app.use(async (ctx, next) => {
+async function createDb(ctx: Ctx, next: Next) {
+    // Should initialize ctx.state.db
+}
+
+async function loginRoute(ctx: Ctx, next: Next) {
     if (ctx.request.method === 'POST' && ctx.request.url.pathname === '/login') {
         const body = ctx.request.body({type: 'json'});
         const {username, password} = await body.value;
-        const res = loginHandler({username, password});
+        const res = await loginHandler(ctx.state.db, {username, password});
         ctx.response.body = res;
         ctx.response.status = Status.OK;
     } else {
         next();
     }
-});
+}
+
+
+app.use(setResponseType);
+app.use(createDb);
+app.use(loginRoute);
 
 app.use((ctx) => {
-  ctx.response.body = "Hello World!";
+    ctx.response.body = `{"msg":"Hello World!"}`;
+});
+
+app.addEventListener('listen', () => {
+  console.log(`Listening on localhost:8000`);
 });
 
 await app.listen({ port: 8000 });

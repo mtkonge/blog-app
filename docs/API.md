@@ -1,10 +1,26 @@
 # Api
 
-## User
+### In general
+
+All id's are strings
+
+All responses have an `ok: boolean` field, which can be checked reliably to assert success.
+
+Requests with a * attached signify that it requires a `token` header acquired from user login.
+
+## Users
 
 ### POST /register
 
+```
+/api/users/register
+```
+
+Create a new user.
+
 #### Request
+
+Username must be valid and unique.
 
 ```ts
 {
@@ -13,17 +29,103 @@
 }
 ```
 
-#### Response
+#### Response OK
 
 ```ts
 {
-    response: "OK" | "Username already in use" | "Invalid username/password",
-    userId?: number
+    ok: true,
+    user: {
+        id: string,
+        username: string,
+        passwordHash: string,
+    }
 }
 ```
+
+#### Response Error
+
+```ts
+{
+    ok: false,
+    error: "Username already in use" | "Invalid username/password" | string,
+}
+```
+
+### GET /:id
+
+```
+/api/users/:userId
+```
+
+Get publicly available data of any user.
+
+#### Request Params
+
+```ts
+{
+    userId: string
+}
+```
+
+#### Response OK
+
+```ts
+{
+    ok: true,
+    user: {
+        id: string,
+        username: string,
+    },
+}
+```
+
+#### Response Error
+
+```ts
+{
+    ok: false,
+    error: "Unknown user" | string,
+}
+```
+
+### GET /data *
+
+```
+/api/users/data
+```
+
+#### Response OK
+
+```ts
+{
+    ok: true,
+    user: {
+        id: string,
+        username: string,
+        passwordHash: string,
+    },
+}
+```
+
+#### Response Error
+
+```ts
+{
+    ok: false,
+    error: "Unauthorized" | "Unknown user" | string,
+}
+```
+
+## Sessions
 
 ### Post /login
 
+```
+/api/sessions/login
+```
+
+Create a session of an existing user, to get a token for use in other requests.
+
 #### Request
 
 ```ts
@@ -33,63 +135,99 @@
 }
 ```
 
-#### Response 
+#### Response OK
+
 ```ts
 {
-    response: "Ok" | "Wrong password/username",
-    id?: number,
-    token?: string
+    ok: true,
+    token: string,
 }
 ```
 
-### Post logout
-
-#### Response
-```ts
-{
-    response: "Ok"
-}
-```
-
-### GET /user/:id
-
+#### Response Error
 
 ```ts
 {
-    msg: "Unauthorized" | "User is null",
-    id?: number,
-    username?: string
-}
-```
-
-### GET /data
-
-```ts
-{
-    msg: "Unauthorized" | "Ok" | "User is null"
+    ok: false,
+    error: "unknown username/password" | string,
 }
 ```
 
 ## Blog
 
-### POST /create-blog
+### GET /:blogId
+
+```
+/api/blogs/:blogId
+```
+
+#### Request Params
+
+```ts
+{
+    blogId: string,
+}
+```
+
+#### Response OK
+
+```ts
+{
+    ok: true,
+    blog: {
+        id: string
+        title: string,
+        content: string,
+        authorUserId: string,
+    }
+}
+```
+
+#### Response Error
+
+```ts
+{
+    ok: false,
+    error: string,
+}
+```
+
+### POST /create *
+
+```
+/api/blogs/create
+```
 
 #### Request
 
 ```ts
 {
-    token: string,
     title: string,
     content: string,
-    userId: number
+    authorUserId: string,
 }
 ```
 
-#### Post
+#### Response OK
 
 ```ts
 {
-    response: "Ok" | "Unauthorized" | "Title invalid" | "Content too long",
-    blog?: Blog[]
+    ok: true,
+    blog: {
+        id: string,
+        title: string,
+        content: string,
+        authorUserId: string,
+    }
+}
+```
+
+#### Response Error
+
+
+```ts
+{
+    ok: false,
+    error: "Unauthorized" | "Title invalid" | "Content too long" | string,
 }
 ```
