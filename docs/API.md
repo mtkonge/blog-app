@@ -2,6 +2,8 @@
 
 ### In general
 
+All id's are strings
+
 All responses have an `ok: boolean` field, which can be checked reliably to assert success.
 
 ## Users
