@@ -149,7 +149,7 @@ Create a session of an existing user, to get a token for use in other requests.
 ```ts
 {
     ok: false,
-    error: "unknown username/password" | "Incomplete" | string,
+    error: "Unknown username/password" | "Incomplete" | string,
 }
 ```
 
