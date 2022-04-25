@@ -38,7 +38,7 @@ Username must be valid and unique.
 }
 ```
 
-#### Response BadRequest
+#### Response Error
 
 ```ts
 {
@@ -47,10 +47,10 @@ Username must be valid and unique.
 }
 ```
 
-### GET /user/:id
+### GET /:id
 
 ```
-/api/users/:id
+/api/users/:userId
 ```
 
 Get publicly available data of any user.
@@ -59,7 +59,7 @@ Get publicly available data of any user.
 
 ```ts
 {
-    id: string
+    userId: string
 }
 ```
 
@@ -75,7 +75,7 @@ Get publicly available data of any user.
 }
 ```
 
-#### Response BadRequest
+#### Response Error
 
 ```ts
 {
@@ -103,7 +103,7 @@ Get publicly available data of any user.
 }
 ```
 
-#### Response BadRequest
+#### Response Error
 
 ```ts
 {
@@ -140,7 +140,7 @@ Create a session of an existing user, to get a token for use in other requests.
 }
 ```
 
-#### Response BadRequest
+#### Response Error
 
 ```ts
 {
@@ -150,6 +150,43 @@ Create a session of an existing user, to get a token for use in other requests.
 ```
 
 ## Blog
+
+### GET /:blogId
+
+```
+/api/blogs/:blogId
+```
+
+#### Request Params
+
+```ts
+{
+    blogId: string,
+}
+```
+
+#### Response OK
+
+```ts
+{
+    ok: true,
+    blog: {
+        id: string
+        title: string,
+        content: string,
+        authorUserId: string,
+    }
+}
+```
+
+#### Response Error
+
+```ts
+{
+    ok: false,
+    error: string,
+}
+```
 
 ### POST /create
 
@@ -182,7 +219,7 @@ Create a session of an existing user, to get a token for use in other requests.
 }
 ```
 
-#### Response BadRequest
+#### Response Error
 
 
 ```ts
