@@ -69,7 +69,7 @@ Get publicly available data of any user.
 
 ```ts
 {
-    ok true,
+    ok: true,
     user: {
         id: string,
         username: string,
