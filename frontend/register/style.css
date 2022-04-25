@@ -7,13 +7,9 @@ body{
     margin: 0%;
     font-family: Arial, Helvetica, sans-serif;
     display: grid;
-    background-color: #3a3a3a;
-}
-
-.center{
-    display: grid;
     justify-items: center;
     align-items: center;
+    background-color: #3a3a3a;
 }
 
 #main-holder{
@@ -27,14 +23,14 @@ body{
     box-shadow: 0px 0px 5px 2px black;
 }
 
-#login-form{
+#register-form{
     align-self: flex-start;
     display: grid;
     justify-items: center;
     align-items: center;
 }
 
-.login-form-field{
+.register-form-field{
     border: none;
     border-bottom: 1px solid black;
     margin-bottom: 10px;
@@ -42,12 +38,3 @@ body{
     outline: none;
     padding: 0px 0px 5px 5px;
 }
-
-button{
-    align-self: flex-start;
-    display: grid;
-    justify-items: center;
-    align-items: center;
-}
-
-
