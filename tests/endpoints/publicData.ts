@@ -1,10 +1,11 @@
 import { ReturnedRegisterInformation } from "./register.ts";
 import { API_URL } from "../api_url.ts";
-import { test, hasValue } from "./utils.ts";
+import { test, hasValue, randomUsername } from "../utils.ts";
 
 const testUnknownUser = async () => {
+    const randomUserId = "unknown_" + randomUsername();
     const res = await (
-        await fetch(API_URL + "/users/0123456789", {
+        await fetch(API_URL + `/users/${randomUserId}`, {
             method: "GET",
         })
     ).json();
@@ -16,7 +17,7 @@ const testUnknownUser = async () => {
     );
     test(
         res.error === "Unknown user",
-        `public data from unknown user: response error was '${res.error}', expected 'Invalid username/password'`,
+        `public data from unknown user: response error was '${res.error}', expected 'Unknown user'`,
     );
 };
 
@@ -69,6 +70,6 @@ const testOnlyPublicData = async (info: ReturnedRegisterInformation) => {
 
 export const testPublicData = async (info: ReturnedRegisterInformation) => {
     await testUnknownUser();
-    await testUserData();
-    await testOnlyPublicData();
+    await testUserData(info);
+    await testOnlyPublicData(info);
 };
