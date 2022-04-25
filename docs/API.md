@@ -6,6 +6,8 @@ All id's are strings
 
 All responses have an `ok: boolean` field, which can be checked reliably to assert success.
 
+Requests with a * attached signify that it requires a `token` header acquired from user login.
+
 ## Users
 
 ### POST /register
@@ -86,7 +88,7 @@ Get publicly available data of any user.
 }
 ```
 
-### GET /data
+### GET /data *
 
 ```
 /api/users/data
@@ -190,7 +192,7 @@ Create a session of an existing user, to get a token for use in other requests.
 }
 ```
 
-### POST /create
+### POST /create *
 
 ```
 /api/blogs/create
@@ -200,7 +202,6 @@ Create a session of an existing user, to get a token for use in other requests.
 
 ```ts
 {
-    token: string,
     title: string,
     content: string,
     authorUserId: string,
