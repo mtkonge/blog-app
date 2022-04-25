@@ -68,7 +68,9 @@ const testOnlyPublicData = async (info: ReturnedRegisterInformation) => {
     );
 };
 
-export const testPublicData = async (info: ReturnedRegisterInformation) => {
+export const testUsersPublicData = async (
+    info: ReturnedRegisterInformation,
+) => {
     await testUnknownUser();
     await testUserData(info);
     await testOnlyPublicData(info);
