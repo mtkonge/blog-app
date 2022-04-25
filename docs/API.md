@@ -47,7 +47,7 @@ Username must be valid and unique.
 ```ts
 {
     ok: false,
-    error: "Username already in use" | "Invalid username/password" | string,
+    error: "Username already in use" | "Invalid username/password" | "Incomplete" | string,
 }
 ```
 
@@ -149,7 +149,7 @@ Create a session of an existing user, to get a token for use in other requests.
 ```ts
 {
     ok: false,
-    error: "unknown username/password" | string,
+    error: "unknown username/password" | "Incomplete" | string,
 }
 ```
 
@@ -228,6 +228,6 @@ Create a session of an existing user, to get a token for use in other requests.
 ```ts
 {
     ok: false,
-    error: "Unauthorized" | "Title invalid" | "Content too long" | string,
+    error: "Unauthorized" | "Title invalid" | "Content too long" | "Incomplete" | string,
 }
 ```
