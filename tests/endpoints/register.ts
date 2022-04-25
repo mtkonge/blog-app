@@ -80,6 +80,11 @@ const testDuplicateUsername = async () => {
         res1.ok === false,
         "register w duplicate username: second registered user was OK",
     );
+
+    test(
+        res1.error === "Username already in use",
+        `register w duplicate username: response error was '${res.error}', expected 'Username already in use'`,
+    );
 };
 
 const testUniqueUserId = async () => {
