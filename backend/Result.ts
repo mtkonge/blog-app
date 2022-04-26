@@ -33,7 +33,7 @@ export class Result<T> {
     }
 
     public get value(): T {
-        return this._value;
+        return this._value!;
     }
 
     public get error(): Error {

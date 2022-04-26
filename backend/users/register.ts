@@ -1,7 +1,7 @@
-import { Database } from "../Database";
-import { fail, ok, Result } from "../Result";
-import { hashPassword } from "../utils/crypto";
-import { User } from "./User";
+import { Database } from "../Database.ts";
+import { fail, ok, Result } from "../Result.ts";
+import { hashPassword } from "../utils/crypto.ts";
+import { User } from "./User.ts";
 
 
 export type RegisterUserRequest = {

@@ -2,7 +2,12 @@ import { Application, Status } from "./deps.ts";
 import { Ctx, Next, State } from "./models.ts";
 
 import { loginHandler } from "./Login.ts";
+import { MemoryDB } from "./MemoryDB.ts";
+import { runWebServer } from "./web/server.ts";
 
+
+const db = new MemoryDB();
+await runWebServer(db);
 const app = new Application<State>();
 
 async function setResponseType(ctx: Ctx, next: Next) {

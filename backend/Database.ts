@@ -1,5 +1,5 @@
-import { Result } from "./Result";
-import { User, UserId } from "./users/User";
+import { Result } from "./Result.ts";
+import { User, UserId } from "./users/User.ts";
 
 
 export interface Database {

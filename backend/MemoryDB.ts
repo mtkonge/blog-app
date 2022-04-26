@@ -1,6 +1,6 @@
-import { Database } from "./Database";
-import { ok, Result } from "./Result";
-import { User, UserId } from "./users/User";
+import { Database } from "./Database.ts";
+import { ok, Result } from "./Result.ts";
+import { User, UserId } from "./users/User.ts";
 
 
 export class MemoryDB implements Database {
@@ -11,14 +11,14 @@ export class MemoryDB implements Database {
     private users: User[] = [];
    
     public async isUserUsernameUnique(username: string): Promise<Result<boolean>> {
-        return ok(this.users.find(u => u.username === username) === undefined);
+        return  ok(this.users.find(u => u.username === username) === undefined);
     }
 
     public async isUserEmailUnique(email: string): Promise<Result<boolean>> {
         return ok(this.users.find(u => u.email === email) === undefined);
     }
     public async uniqueUserId(): Promise<Result<UserId>> {
-        return ok(this.nextUserId++);
+        return  ok(this.nextUserId++);
     }
 
     public async insertUser(user: User): Promise<Result<null>> {
