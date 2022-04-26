@@ -29,43 +29,50 @@ export const bulkTestIncompleteValues = async (
     headers: Headers,
     values: ValueFields,
 ) => {
-    for (let key in values) {
-        const body = { ...values };
-        body[key] = null;
-        let res = await (
-            await fetch(API_URL + endpoint, {
-                headers,
-                body: body as unknown as BodyInit,
-            })
-        ).json();
+    for (let i = 0; i < 3; i++) {
+        for (let key in values) {
+            const body = { ...values };
 
-        test(
-            res.ok === false,
-            `bulk incomplete (null) values with '${endpoint}' failed: response was OK with field '${key}'`,
-        );
-        test(
-            res.error !== "Incomplete",
-            `bulk incomplete (null) values with '${endpoint}' failed: expected error 'Incomplete', was '${res.error}' with field '${key}'`,
-        );
-    }
+            switch (i) {
+                case 0:
+                    body[key] = null;
+                    break;
+                case 1:
+                    body[key] = undefined;
+                    break;
+                case 2:
+                    delete body[key];
+                    break;
+            }
 
-    for (let key in values) {
-        const body = { ...values };
-        body[key] = undefined;
-        let res = await (
-            await fetch(API_URL + endpoint, {
-                headers,
-                body: body as unknown as BodyInit,
-            })
-        ).json();
+            let res = await (
+                await fetch(API_URL + endpoint, {
+                    headers,
+                    body: body as unknown as BodyInit,
+                })
+            ).json();
 
-        test(
-            res.ok === false,
-            `bulk incomplete (undefined) values with '${endpoint}' failed: response was OK with field '${key}'`,
-        );
-        test(
-            res.error !== "Incomplete",
-            `bulk incomplete (undefined) values with '${endpoint}' failed: expected error 'Incomplete', was '${res.error}' with field '${key}'`,
-        );
+            let word = "";
+            switch (i) {
+                case 0:
+                    word = "null";
+                    break;
+                case 1:
+                    word = "undefined";
+                    break;
+                case 2:
+                    word = "delete";
+                    break;
+            }
+
+            test(
+                res.ok === false,
+                `bulk incomplete (${word}) values with '${endpoint}' failed: response was OK with field '${key}'`,
+            );
+            test(
+                res.error !== "Incomplete",
+                `bulk incomplete (${word}) values with '${endpoint}' failed: expected error 'Incomplete', was '${res.error}' with field '${key}'`,
+            );
+        }
     }
 };
