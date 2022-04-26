@@ -1,3 +1,5 @@
+import { API_URL } from "./api_url.ts";
+
 export const randomUsername = () => {
     return "test_user_" + Math.floor(Math.random() * 1000);
 };
@@ -31,7 +33,7 @@ export const bulkTestIncompleteValues = async (
         const body = { ...values };
         body[key] = null;
         let res = await (
-            await fetch(apiUrl, {
+            await fetch(API_URL + endpoint, {
                 headers,
                 body: body as unknown as BodyInit,
             })
@@ -51,7 +53,7 @@ export const bulkTestIncompleteValues = async (
         const body = { ...values };
         body[key] = undefined;
         let res = await (
-            await fetch(apiUrl, {
+            await fetch(API_URL + endpoint, {
                 headers,
                 body: body as unknown as BodyInit,
             })
