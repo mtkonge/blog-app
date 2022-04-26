@@ -14,13 +14,13 @@ const main = async () => {
 
     const params = new URLSearchParams(window.location.search);
     if (!params.has('blogId')) {
-        titleH1.textContent = 'Please specify /reader?blogId=<blogId>'
+        contentDiv.textContent = 'Please specify /reader?blogId=<blogId>'
         return;
     }
     const blogId = params.get('blogId');
     const blogRes = http.get(`${API_SERVER_HOSTNAME}/api/blogs/${blogId}`);
     if (!blogRes.ok) {
-        titleH1.contentDiv = `
+        contentDiv.textContent = `
             <h2>Failed to fetch blog</h2>
             <p>${blogRes.error}</p>
         `;
